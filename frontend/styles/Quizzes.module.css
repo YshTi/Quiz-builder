@@ -79,23 +79,6 @@
   line-height: 1.5;
 }
 
-.retryBtn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--border-radius-md);
-  color: var(--text-primary);
-  padding: 10px 20px;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--transition-smooth);
-}
-
-.retryBtn:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
 
 @media (max-width: 640px) {
   .header {

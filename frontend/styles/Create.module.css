@@ -109,26 +109,6 @@
   font-weight: 700;
 }
 
-.addBtn {
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid rgba(124, 58, 237, 0.2);
-  border-radius: var(--border-radius-md);
-  color: #a78bfa;
-  padding: 8px 16px;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: var(--transition-smooth);
-}
-
-.addBtn:hover {
-  background: rgba(124, 58, 237, 0.18);
-  border-color: rgba(124, 58, 237, 0.4);
-}
-
 .questionsContainer {
   display: flex;
   flex-direction: column;
@@ -192,8 +172,8 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(var(--surface-subtle));
+  border: 1px solid var(--input-bg-focus);
   border-radius: var(--border-radius-md);
   padding: 14px;
   color: var(--text-secondary);
@@ -203,31 +183,41 @@
   transition: var(--transition-smooth);
 }
 
-.typeBtn:hover, .typeBtn:focus {
-  background: rgba(124, 58, 237, 0.1);
+.typeBtn:hover,
+.typeBtn:focus-visible {
+  background: var(--interactive-bg);
   color: var(--text-primary);
-  border-color: rgba(124, 58, 237, 0.1);
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
+
+  border-color: var(--interactive-border-strong);
+
+  box-shadow: var(--interactive-shadow);
+
+  outline: none;
 }
 
 .typeBtnSelected {
-  background: rgba(124, 58, 237, 0.1);
-  border-color: var(--accent-color);
-  box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
+  background: var(--interactive-bg);
+  color: var(--text-primary);
+
+  border-color: var(--interactive-border-strong);
+
+  box-shadow: var(--interactive-shadow);
+}
+
+.typeBtn:hover .typeIcon,
+.typeBtn:focus-visible .typeIcon,
+.typeBtnSelected .typeIcon {
+  color: var(--interactive-icon);
 }
 
 .typeIcon {
   color: var(--text-muted);
 }
 
-.typeBtnSelected .typeIcon{
-  color: #c084fc;
-}
-
 .typeDetailsBox {
   margin-top: 24px;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius-md);
   padding: 20px;
 }
@@ -253,8 +243,8 @@
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius-md);
   color: var(--text-primary);
   font-weight: 600;
@@ -263,7 +253,7 @@
 }
 
 .boolBtn:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--surface-border);
 }
 
 .boolBtnSelected {

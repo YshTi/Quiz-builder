@@ -189,7 +189,7 @@ export default function CreateQuiz() {
               <h1 className={styles.pageTitle}>Create Custom Quiz</h1>
               <p className={styles.pageSubtitle}>Define your quiz schema, add questions and configure validations.</p>
             </div>
-            <button type="submit" className="gradient-btn" disabled={submitting}>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? <CircleDot className={styles.spinner} size={18} /> : <Save size={18} />}
               <span>{submitting ? 'Saving Quiz...' : 'Save Quiz'}</span>
             </button>
@@ -226,7 +226,7 @@ export default function CreateQuiz() {
             <h2>Questions ({fields.length})</h2>
             <button
               type="button"
-              className={styles.addBtn}
+              className="btn btn-secondary btn-small"
               onClick={() => append({
                 type: 'BOOLEAN',
                 text: '',
@@ -440,7 +440,7 @@ export default function CreateQuiz() {
           </div>
 
           <div className={styles.formFooterSubmit}>
-            <button type="submit" className="gradient-btn" disabled={submitting} style={{ padding: '14px 40px', fontSize: '16px' }}>
+            <button type="submit" className="btn btn-primary" disabled={submitting}>
               {submitting ? <CircleDot className={styles.spinner} size={18} /> : <Save size={18} />}
               <span>{submitting ? 'Creating Quiz...' : 'Create Quiz Blueprint'}</span>
             </button>

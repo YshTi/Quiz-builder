@@ -48,7 +48,7 @@ export default function QuizDetail() {
         <AlertCircle className={styles.errorIcon} size={40} />
         <h3>Failed to Load Quiz</h3>
         <p>{error || 'The requested quiz could not be found.'}</p>
-        <Link href="/quizzes" className={styles.backBtn}>
+        <Link href="/quizzes" className="btn btn-secondary">
           <ArrowLeft size={16} />
           <span>Back to Dashboard</span>
         </Link>

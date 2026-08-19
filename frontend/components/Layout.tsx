@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import {
-  BrainCircuit,
   BookOpen,
   PlusCircle,
   Moon,
   Sun,
 } from 'lucide-react';
+import { GiBrain } from "react-icons/gi";
 import styles from '../styles/Layout.module.css';
 
 interface LayoutProps {
@@ -54,7 +54,9 @@ export default function Layout({ children }: LayoutProps) {
       <header className={styles.header}>
         <div className={styles.navContainer}>
           <Link href="/" className={styles.logo}>
-            <BrainCircuit className={styles.logoIcon} />
+            <span className={styles.logoIcon}>
+              <GiBrain size={24} />
+            </span>
 
             <span>
               Quiz<span className={styles.logoAccent}>Builder</span>
@@ -114,7 +116,7 @@ export default function Layout({ children }: LayoutProps) {
 
       <footer className={styles.footer}>
         <p>
-          &copy; {new Date().getFullYear()} Quiz Builder. Designed with &hearts;
+          &copy; {new Date().getFullYear()} Quiz Builder. Designed with <span className={styles.heartIcon}>❤</span>
         </p>
       </footer>
     </div>

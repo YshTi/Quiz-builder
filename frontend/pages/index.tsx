@@ -1,6 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Sparkles, BrainCircuit, ArrowRight, BookOpen, PlusCircle } from 'lucide-react';
+import { Sparkles, ArrowRight, BookOpen, PlusCircle } from 'lucide-react';
+import {
+  HiOutlineClipboardDocumentCheck,
+  HiOutlineSparkles,
+} from 'react-icons/hi2';
+import { MdOutlineCategory } from 'react-icons/md';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -25,12 +30,12 @@ export default function Home() {
           Create tailored questionnaires in seconds. Supported question types include Boolean, Short Text Answers, and Checkbox Multiple-Choice with instant answer keys.
         </p>
         <div className={styles.actions}>
-          <Link href="/quizzes" className="gradient-btn">
+          <Link href="/quizzes" className="btn btn-primary">
             <BookOpen size={18} />
             <span>Explore Dashboard</span>
             <ArrowRight size={16} />
           </Link>
-          <Link href="/create" className={styles.outlineBtn}>
+          <Link href="/create" className="btn btn-secondary">
             <PlusCircle size={18} />
             <span>Create New Quiz</span>
           </Link>
@@ -39,21 +44,21 @@ export default function Home() {
         <div className={styles.grid}>
           <div className="glass-card styleCard">
             <div className={styles.cardIconWrapper}>
-              <BrainCircuit className={styles.cardIcon} />
+              <HiOutlineClipboardDocumentCheck size={26} />
             </div>
             <h3>Intelligent Schema</h3>
             <p>Define rules and save structured answers instantly to a persistent local SQLite backend.</p>
           </div>
           <div className="glass-card styleCard">
             <div className={styles.cardIconWrapper}>
-              <BrainCircuit className={styles.cardIcon} />
+              <MdOutlineCategory size={26} />
             </div>
             <h3>Diverse Types</h3>
             <p>Seamlessly mix and match True/False, open-ended text inputs, and multi-choice checkboxes.</p>
           </div>
           <div className="glass-card styleCard">
             <div className={styles.cardIconWrapper}>
-              <BrainCircuit className={styles.cardIcon} />
+              <HiOutlineSparkles size={26} />
             </div>
             <h3>Glassmorphic UI</h3>
             <p>Designed with premium modern animations, glowing highlights, and clear feedback loops.</p>

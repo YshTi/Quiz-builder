@@ -72,7 +72,7 @@ export default function QuizzesDashboard() {
             <h1 className={styles.title}>Quiz Dashboard</h1>
             <p className={styles.subtitle}>Select a quiz to review its structure, or create a brand new one.</p>
           </div>
-          <Link href="/create" className="gradient-btn">
+          <Link href="/create" className="btn btn-primary">
             <PlusCircle size={18} />
             <span>Create Quiz</span>
           </Link>
@@ -88,7 +88,7 @@ export default function QuizzesDashboard() {
             <AlertCircle className={styles.errorIcon} size={40} />
             <h3>Database Connection Issue</h3>
             <p>{error}</p>
-            <button onClick={() => loadQuizzes()} className={styles.retryBtn}>
+            <button onClick={() => loadQuizzes()} className="btn btn-secondary">
               <RefreshCw size={16} />
               <span>Retry Connection</span>
             </button>
@@ -98,7 +98,7 @@ export default function QuizzesDashboard() {
             <HelpCircle className={styles.emptyIcon} size={48} />
             <h3>No Quizzes Found</h3>
             <p>It looks like there are no quizzes in the SQLite database yet.</p>
-            <Link href="/create" className="gradient-btn">
+            <Link href="/create" className="btn btn-primary">
               <PlusCircle size={18} />
               <span>Create Your First Quiz</span>
             </Link>

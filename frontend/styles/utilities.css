@@ -43,43 +43,6 @@
     color: var(--text-muted);
 }
 
-.gradient-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-
-    padding: 12px 24px;
-
-    background: var(--accent-gradient);
-    color: #fff;
-
-    border: none;
-    border-radius: var(--border-radius-md);
-
-    font-weight: 600;
-
-    cursor: pointer;
-    transition: var(--transition-smooth);
-}
-
-.gradient-btn:hover {
-    transform: translateY(-1px);
-    background: var(--accent-gradient-hover);
-
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-}
-
-.gradient-btn:active {
-    transform: translateY(1px);
-}
-
-.gradient-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
 
 @keyframes fadeIn {
     from {

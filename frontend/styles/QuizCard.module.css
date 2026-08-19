@@ -7,6 +7,11 @@
   height: 100%;
 }
 
+.card:hover {
+  box-shadow: var(--interactive-shadow);
+  border-color: var(--interactive-border-strong);
+}
+
 .cardHeader {
   display: flex;
   justify-content: space-between;
@@ -74,7 +79,7 @@
 }
 
 .footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--input-bg);
   padding-top: 16px;
   display: flex;
   align-items: center;

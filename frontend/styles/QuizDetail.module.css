@@ -118,8 +118,8 @@
   display: flex;
   align-items: center;
   padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius-md);
   transition: var(--transition-smooth);
 }
@@ -181,8 +181,8 @@
 }
 
 .correctAnswersBox {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--surface-subtle);
+  border: 1px solid var(--surface-border);
   border-radius: var(--border-radius-md);
   padding: 16px;
 }
@@ -258,22 +258,4 @@
   font-size: 14px;
   margin-bottom: 24px;
   line-height: 1.5;
-}
-
-.backBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  padding: 10px 20px;
-  font-weight: 600;
-  border-radius: var(--border-radius-md);
-  cursor: pointer;
-  transition: var(--transition-smooth);
-}
-
-.backBtn:hover {
-  background: rgba(255, 255, 255, 0.08);
 }
