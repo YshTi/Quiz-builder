@@ -224,6 +224,8 @@
   position: relative;
   overflow: hidden;
   min-height: 595px;
+  display: flex;
+  flex-direction: column;
 
   padding: 24px;
 
@@ -243,6 +245,7 @@
   gap: 24px;
 
   width: 100%;
+  align-content: start;
 }
 
 .backgroundIcons {
@@ -385,12 +388,16 @@
 }
 
 .pagination {
+  position: relative;
+  z-index: 1;
+  
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
 
-  margin-top: 36px;
+  margin-top: auto;
+  padding-top: 28px;
   margin-bottom: 24px;
 }
 
