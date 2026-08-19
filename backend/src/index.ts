@@ -1,35 +1,42 @@
-import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
+
 import quizRoutes from "./routes/quizRoutes";
 
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5001;
+
+const port = Number(process.env.PORT) || 5001;
+
+const frontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
 
 app.use(
   cors({
-    origin: "*", // For local dev, allow requests from any source, including frontend dev servers
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    origin: frontendUrl,
+
+    methods: ["GET", "POST", "DELETE", "OPTIONS"],
+
+    allowedHeaders: ["Content-Type"],
   }),
 );
 
 app.use(express.json());
 
-// Routes
 app.use("/api/quizzes", quizRoutes);
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+app.get("/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    timestamp: new Date().toISOString(),
+  });
 });
 
-// Start listening
 app.listen(port, () => {
   console.log(
     `[server]: Quiz Builder Backend running on http://localhost:${port}`,
   );
 });
+
 export default app;

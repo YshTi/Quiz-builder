@@ -16,6 +16,8 @@ body,
 
 html {
   overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 body {

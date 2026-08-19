@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { FiAlertTriangle, FiX } from "react-icons/fi";
+
 import styles from "../styles/ConfirmModal.module.css";
 
 interface ConfirmModalProps {
@@ -23,31 +25,82 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isOpen) {
       return;
     }
 
-    const html = document.documentElement;
-    const body = document.body;
+    const previousActiveElement =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
 
-    const previousHtmlOverflow = html.style.overflow;
-    const previousBodyOverflow = body.style.overflow;
-
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
+    requestAnimationFrame(() => {
+      modalRef.current?.focus({
+        preventScroll: true,
+      });
+    });
 
     return () => {
-      html.style.overflow = previousHtmlOverflow;
-      body.style.overflow = previousBodyOverflow;
+      previousActiveElement?.focus({
+        preventScroll: true,
+      });
     };
   }, [isOpen]);
 
-  if (!isOpen) {
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const preventScroll = (event: Event) => {
+      event.preventDefault();
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const scrollKeys = [
+        "ArrowUp",
+        "ArrowDown",
+        "PageUp",
+        "PageDown",
+        "Home",
+        "End",
+        " ",
+      ];
+
+      if (scrollKeys.includes(event.key)) {
+        event.preventDefault();
+      }
+
+      if (event.key === "Escape" && !isLoading) {
+        onCancel();
+      }
+    };
+
+    window.addEventListener("wheel", preventScroll, {
+      passive: false,
+    });
+
+    window.addEventListener("touchmove", preventScroll, {
+      passive: false,
+    });
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, isLoading, onCancel]);
+
+  if (!isOpen || typeof document === "undefined") {
     return null;
   }
 
-  return (
+  return createPortal(
     <div
       className={styles.overlay}
       role="presentation"
@@ -58,11 +111,13 @@ export default function ConfirmModal({
       }}
     >
       <div
+        ref={modalRef}
         className={styles.modal}
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-modal-title"
         aria-describedby="confirm-modal-description"
+        tabIndex={-1}
       >
         <button
           type="button"
@@ -71,10 +126,10 @@ export default function ConfirmModal({
           aria-label="Close confirmation dialog"
           disabled={isLoading}
         >
-          <FiX size={18} />
+          <FiX size={18} aria-hidden="true" />
         </button>
 
-        <div className={styles.iconWrapper}>
+        <div className={styles.iconWrapper} aria-hidden="true">
           <FiAlertTriangle size={24} />
         </div>
 
@@ -106,6 +161,7 @@ export default function ConfirmModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
