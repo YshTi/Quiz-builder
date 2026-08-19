@@ -1,0 +1,418 @@
+.backWrapper {
+  margin-bottom: 24px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+}
+
+.backLink:hover {
+  color: var(--text-primary);
+  transform: translateX(-4px);
+}
+
+.form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  gap: 20px;
+}
+
+.pageTitle {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+}
+
+.pageSubtitle {
+  color: var(--text-secondary);
+  font-size: 15px;
+}
+
+.errorBanner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--error-bg);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+  padding: 16px 20px;
+  border-radius: var(--border-radius-md);
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card {
+  padding: 30px;
+  margin-bottom: 32px;
+}
+
+.cardHeaderIcon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.headerIcon {
+  color: var(--accent-cyan);
+}
+
+.cardHeaderIcon h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.label {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.inputError {
+  font-size: 13px;
+  color: var(--error-color);
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sectionHeader h2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.addBtn {
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: var(--border-radius-md);
+  color: #a78bfa;
+  padding: 8px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+.addBtn:hover {
+  background: rgba(124, 58, 237, 0.18);
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.questionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.questionCard {
+  padding: 30px;
+  position: relative;
+}
+
+.qHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.qNumber {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent-cyan);
+}
+
+.qActions {
+  display: flex;
+  gap: 8px;
+}
+
+.removeBtn {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: var(--error-color);
+  padding: 6px 10px;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.removeBtn:hover:not(:disabled) {
+  background: var(--error-color);
+  color: white;
+}
+
+.removeBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.typeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--border-radius-md);
+  padding: 14px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.typeBtn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.typeBtnSelected {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
+}
+
+.typeIcon {
+  color: var(--text-muted);
+}
+
+.typeBtnSelected .typeIcon {
+  color: #c084fc;
+}
+
+.typeDetailsBox {
+  margin-top: 24px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: var(--border-radius-md);
+  padding: 20px;
+}
+
+.optionsTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.booleanOptions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.boolBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.boolBtn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.boolBtnSelected {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.05);
+}
+
+.radioDot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boolBtnSelected .radioDot {
+  border-color: var(--success-color);
+}
+
+.radioDotInner {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success-color);
+}
+
+.checkboxOptionsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.addOptionBtn {
+  background: transparent;
+  border: none;
+  color: var(--accent-cyan);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: var(--transition-smooth);
+}
+
+.addOptionBtn:hover {
+  color: #22d3ee;
+}
+
+.optionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.optionItemRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.optionCheckBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.checkboxSquare {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  color: transparent;
+}
+
+.optionCheckBtnSelected .checkboxSquare {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  color: white;
+}
+
+.checkIcon {
+  stroke-width: 3;
+}
+
+.optionInput {
+  flex-grow: 1;
+}
+
+.deleteOptionBtn {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.1);
+  color: var(--error-color);
+  padding: 10px;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.deleteOptionBtn:hover:not(:disabled) {
+  background: var(--error-color);
+  color: white;
+}
+
+.deleteOptionBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.formFooterSubmit {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .formHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .formHeader button {
+    width: 100%;
+  }
+  .typeGrid {
+    grid-template-columns: 1fr;
+  }
+  .booleanOptions {
+    grid-template-columns: 1fr;
+  }
+  .formFooterSubmit button {
+    width: 100%;
+  }
+}
