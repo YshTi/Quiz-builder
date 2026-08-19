@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import { Trash2, Calendar, HelpCircle } from 'lucide-react';
+import Link from "next/link";
+import { Trash2, Calendar, HelpCircle } from "lucide-react";
 
-import { QuizSummary } from '../utils/api';
+import { QuizSummary } from "../utils/api";
 
-import styles from '../styles/QuizCard.module.css';
+import styles from "../styles/QuizCard.module.css";
 
 interface QuizCardProps {
   quiz: QuizSummary;
@@ -16,32 +16,23 @@ export default function QuizCard({
   onDelete,
   isDeleting,
 }: QuizCardProps) {
-  const handleDelete = (
-    event: React.MouseEvent<HTMLButtonElement>,
-  ) => {
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
     onDelete(quiz.id);
   };
 
-  const formattedDate = new Date(
-    quiz.createdAt,
-  ).toLocaleDateString(undefined, {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
+  const formattedDate = new Date(quiz.createdAt).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
   });
 
   return (
-    <Link
-      href={`/quizzes/${quiz.id}`}
-      className={`${styles.card} glass-card`}
-    >
+    <Link href={`/quizzes/${quiz.id}`} className={`${styles.card} glass-card`}>
       <div className={styles.cardHeader}>
-        <h3 className={styles.title}>
-          {quiz.title}
-        </h3>
+        <h3 className={styles.title}>{quiz.title}</h3>
 
         <button
           type="button"
@@ -57,26 +48,16 @@ export default function QuizCard({
 
       <div className={styles.meta}>
         <div className={styles.metaItem}>
-          <HelpCircle
-            size={15}
-            className={styles.icon}
-            aria-hidden="true"
-          />
+          <HelpCircle size={15} className={styles.icon} aria-hidden="true" />
 
           <span>
-            {quiz.questionCount}{' '}
-            {quiz.questionCount === 1
-              ? 'Question'
-              : 'Questions'}
+            {quiz.questionCount}{" "}
+            {quiz.questionCount === 1 ? "Question" : "Questions"}
           </span>
         </div>
 
         <div className={styles.metaItem}>
-          <Calendar
-            size={15}
-            className={styles.icon}
-            aria-hidden="true"
-          />
+          <Calendar size={15} className={styles.icon} aria-hidden="true" />
 
           <span>{formattedDate}</span>
         </div>
@@ -85,10 +66,7 @@ export default function QuizCard({
       <div className={styles.footer}>
         <span className={styles.viewLink}>
           View Quiz Details
-          <span
-            className={styles.arrow}
-            aria-hidden="true"
-          >
+          <span className={styles.arrow} aria-hidden="true">
             &rarr;
           </span>
         </span>

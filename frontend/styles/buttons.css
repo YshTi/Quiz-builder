@@ -1,131 +1,131 @@
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 
-    border-radius: var(--border-radius-md);
+  border-radius: var(--border-radius-md);
 
-    font-family: inherit;
-    font-weight: 600;
-    line-height: 1;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 1;
 
-    cursor: pointer;
-    transition: var(--transition-smooth);
+  cursor: pointer;
+  transition: var(--transition-smooth);
 }
 
 .btn:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* Primary gradient button */
 
 .btn-primary {
-    padding: 12px 24px;
+  padding: 12px 24px;
 
-    background: var(--accent-gradient);
-    color: #fff;
+  background: var(--accent-gradient);
+  color: #fff;
 
-    border: 1px solid transparent;
+  border: 1px solid transparent;
 }
 
 .btn-primary:hover,
 .btn-primary:focus-visible {
-    background: var(--accent-gradient-hover);
+  background: var(--accent-gradient-hover);
 
-    box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
 
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
 
 .btn-primary:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 /* Secondary / outline button */
 
 .btn-secondary {
-    padding: 10px 20px;
+  padding: 10px 20px;
 
-    background: transparent;
-    color: var(--text-primary);
+  background: transparent;
+  color: var(--text-primary);
 
-    border: 1px solid var(--interactive-border);
+  border: 1px solid var(--interactive-border);
 }
 
 .btn-secondary:hover,
 .btn-secondary:focus-visible {
-    background: var(--interactive-bg);
-    color: var(--text-primary);
+  background: var(--interactive-bg);
+  color: var(--text-primary);
 
-    border-color: var(--interactive-border-strong);
+  border-color: var(--interactive-border-strong);
 
-    box-shadow: var(--interactive-shadow);
+  box-shadow: var(--interactive-shadow);
 
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
 
 .btn-secondary:active {
-    transform: translateY(1px);
+  transform: translateY(1px);
 }
 
 /* Small secondary actions */
 
 .btn-small {
-    padding: 8px 14px;
-    font-size: 14px;
+  padding: 8px 14px;
+  font-size: 14px;
 }
 
 /* Icon-only action */
 
 .btn-icon {
-    width: 40px;
-    height: 40px;
-    padding: 0;
+  width: 40px;
+  height: 40px;
+  padding: 0;
 
-    background: transparent;
-    color: var(--text-secondary);
+  background: transparent;
+  color: var(--text-secondary);
 
-    border: 1px solid var(--interactive-border);
+  border: 1px solid var(--interactive-border);
 }
 
 .btn-icon:hover,
 .btn-icon:focus-visible {
-    background: var(--interactive-bg);
-    color: var(--text-primary);
+  background: var(--interactive-bg);
+  color: var(--text-primary);
 
-    border-color: var(--interactive-border-strong);
+  border-color: var(--interactive-border-strong);
 
-    box-shadow: var(--interactive-shadow);
+  box-shadow: var(--interactive-shadow);
 }
 
 /* Destructive action */
 
 .btn-danger {
-    background: rgba(239, 68, 68, 0.08);
-    color: var(--error-color);
+  background: rgba(239, 68, 68, 0.08);
+  color: var(--error-color);
 
-    border: 1px solid rgba(239, 68, 68, 0.18);
+  border: 1px solid rgba(239, 68, 68, 0.18);
 }
 
 .btn-danger:hover,
 .btn-danger:focus-visible {
-    background: var(--error-color);
-    color: #fff;
+  background: var(--error-color);
+  color: #fff;
 
-    border-color: var(--error-color);
+  border-color: var(--error-color);
 
-    box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
 }
 
 /* Disabled */
 
 .btn:disabled,
-.btn[aria-disabled='true'] {
-    opacity: 0.45;
-    cursor: not-allowed;
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
 
-    transform: none;
-    box-shadow: none;
+  transform: none;
+  box-shadow: none;
 }

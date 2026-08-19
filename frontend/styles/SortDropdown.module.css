@@ -1,0 +1,128 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-width: 150px;
+}
+
+.trigger {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  background: var(--input-bg);
+  color: var(--text-primary);
+
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius-md);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: var(--transition-smooth);
+}
+
+.trigger:hover,
+.trigger:focus-visible {
+  background: var(--interactive-bg);
+  border-color: var(--interactive-border-strong);
+  box-shadow: var(--interactive-shadow);
+  outline: none;
+}
+
+.triggerOpen {
+  background: var(--interactive-bg);
+  border-color: var(--interactive-border-strong);
+
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  box-shadow: var(--interactive-shadow);
+}
+
+.chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  z-index: 100;
+
+  width: 100%;
+
+  padding: 6px;
+
+  background: var(--panel-bg);
+
+  border: 1px solid var(--interactive-border-strong);
+  border-top: 0;
+
+  border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.16),
+    var(--interactive-shadow);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.option {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 12px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: var(--transition-smooth);
+}
+
+.option:hover,
+.option:focus-visible {
+  background: var(--interactive-bg);
+  color: var(--text-primary);
+
+  border-color: var(--interactive-border);
+
+  outline: none;
+}
+
+.optionSelected {
+  background: var(--interactive-bg-strong);
+  color: var(--text-primary);
+
+  border-color: var(--interactive-border-strong);
+}
+
+.optionSelected svg {
+  color: var(--interactive-icon);
+}

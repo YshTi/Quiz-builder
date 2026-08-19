@@ -1,31 +1,26 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import {
-  BookOpen,
-  PlusCircle,
-  Moon,
-  Sun,
-} from 'lucide-react';
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { BookOpen, PlusCircle, Moon, Sun } from "lucide-react";
 import { GiBrain } from "react-icons/gi";
-import styles from '../styles/Layout.module.css';
+import styles from "../styles/Layout.module.css";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-type Theme = 'light' | 'dark';
+type Theme = "light" | "dark";
 
 const getPreferredTheme = (): Theme => {
-  const savedTheme = localStorage.getItem('theme');
+  const savedTheme = localStorage.getItem("theme");
 
-  if (savedTheme === 'light' || savedTheme === 'dark') {
+  if (savedTheme === "light" || savedTheme === "dark") {
     return savedTheme;
   }
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches
-    ? 'dark'
-    : 'light';
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
 };
 
 export default function Layout({ children }: LayoutProps) {
@@ -38,15 +33,12 @@ export default function Layout({ children }: LayoutProps) {
 
   const toggleTheme = () => {
     const currentTheme =
-      document.documentElement.dataset.theme === 'light'
-        ? 'light'
-        : 'dark';
+      document.documentElement.dataset.theme === "light" ? "light" : "dark";
 
-    const nextTheme: Theme =
-      currentTheme === 'dark' ? 'light' : 'dark';
+    const nextTheme: Theme = currentTheme === "dark" ? "light" : "dark";
 
     document.documentElement.dataset.theme = nextTheme;
-    localStorage.setItem('theme', nextTheme);
+    localStorage.setItem("theme", nextTheme);
   };
 
   return (
@@ -67,10 +59,10 @@ export default function Layout({ children }: LayoutProps) {
             <Link
               href="/quizzes"
               className={`${styles.navLink} ${
-                router.pathname === '/quizzes' ||
-                router.pathname === '/quizzes/[id]'
+                router.pathname === "/quizzes" ||
+                router.pathname === "/quizzes/[id]"
                   ? styles.active
-                  : ''
+                  : ""
               }`}
             >
               <BookOpen size={18} />
@@ -80,7 +72,7 @@ export default function Layout({ children }: LayoutProps) {
             <Link
               href="/create"
               className={`${styles.navLink} ${
-                router.pathname === '/create' ? styles.active : ''
+                router.pathname === "/create" ? styles.active : ""
               }`}
             >
               <PlusCircle size={18} />
@@ -94,17 +86,9 @@ export default function Layout({ children }: LayoutProps) {
               aria-label="Toggle color theme"
               title="Toggle color theme"
             >
-              <Sun
-                size={18}
-                className={styles.sunIcon}
-                aria-hidden="true"
-              />
+              <Sun size={18} className={styles.sunIcon} aria-hidden="true" />
 
-              <Moon
-                size={18}
-                className={styles.moonIcon}
-                aria-hidden="true"
-              />
+              <Moon size={18} className={styles.moonIcon} aria-hidden="true" />
             </button>
           </nav>
         </div>
@@ -116,7 +100,8 @@ export default function Layout({ children }: LayoutProps) {
 
       <footer className={styles.footer}>
         <p>
-          &copy; {new Date().getFullYear()} Quiz Builder. Designed with <span className={styles.heartIcon}>❤</span>
+          &copy; {new Date().getFullYear()} Quiz Builder. Designed with{" "}
+          <span className={styles.heartIcon}>❤</span>
         </p>
       </footer>
     </div>

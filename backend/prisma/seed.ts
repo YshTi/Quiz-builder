@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -10,26 +10,26 @@ async function main() {
   // Seed sample Quiz 1: JavaScript Essentials
   const quiz1 = await prisma.quiz.create({
     data: {
-      title: 'JavaScript Essentials',
+      title: "JavaScript Essentials",
       questions: {
         create: [
           {
-            type: 'BOOLEAN',
-            text: 'JavaScript is a statically-typed language.',
-            options: JSON.stringify(['True', 'False']),
-            correctAnswers: JSON.stringify(['False']),
+            type: "BOOLEAN",
+            text: "JavaScript is a statically-typed language.",
+            options: JSON.stringify(["True", "False"]),
+            correctAnswers: JSON.stringify(["False"]),
           },
           {
-            type: 'INPUT',
-            text: 'What keyword is used to declare a block-scoped local variable that cannot be reassigned?',
+            type: "INPUT",
+            text: "What keyword is used to declare a block-scoped local variable that cannot be reassigned?",
             options: JSON.stringify([]),
-            correctAnswers: JSON.stringify(['const']),
+            correctAnswers: JSON.stringify(["const"]),
           },
           {
-            type: 'CHECKBOX',
-            text: 'Which of the following are primitive data types in JavaScript?',
-            options: JSON.stringify(['String', 'Number', 'Array', 'Undefined']),
-            correctAnswers: JSON.stringify(['String', 'Number', 'Undefined']),
+            type: "CHECKBOX",
+            text: "Which of the following are primitive data types in JavaScript?",
+            options: JSON.stringify(["String", "Number", "Array", "Undefined"]),
+            correctAnswers: JSON.stringify(["String", "Number", "Undefined"]),
           },
         ],
       },
@@ -39,33 +39,42 @@ async function main() {
   // Seed sample Quiz 2: HTML & Web Standards
   const quiz2 = await prisma.quiz.create({
     data: {
-      title: 'HTML & Web Standards',
+      title: "HTML & Web Standards",
       questions: {
         create: [
           {
-            type: 'BOOLEAN',
-            text: 'In HTML, block-level elements start on a new line and take up the full width available.',
-            options: JSON.stringify(['True', 'False']),
-            correctAnswers: JSON.stringify(['True']),
+            type: "BOOLEAN",
+            text: "In HTML, block-level elements start on a new line and take up the full width available.",
+            options: JSON.stringify(["True", "False"]),
+            correctAnswers: JSON.stringify(["True"]),
           },
           {
-            type: 'INPUT',
-            text: 'What does CSS stand for?',
+            type: "INPUT",
+            text: "What does CSS stand for?",
             options: JSON.stringify([]),
-            correctAnswers: JSON.stringify(['Cascading Style Sheets']),
+            correctAnswers: JSON.stringify(["Cascading Style Sheets"]),
           },
           {
-            type: 'CHECKBOX',
-            text: 'Which of the following are valid HTML5 structural elements?',
-            options: JSON.stringify(['<header>', '<section>', '<navbar>', '<footer>']),
-            correctAnswers: JSON.stringify(['<header>', '<section>', '<footer>']),
+            type: "CHECKBOX",
+            text: "Which of the following are valid HTML5 structural elements?",
+            options: JSON.stringify([
+              "<header>",
+              "<section>",
+              "<navbar>",
+              "<footer>",
+            ]),
+            correctAnswers: JSON.stringify([
+              "<header>",
+              "<section>",
+              "<footer>",
+            ]),
           },
         ],
       },
     },
   });
 
-  console.log('Database seeded successfully!', {
+  console.log("Database seeded successfully!", {
     quizzes: [quiz1.title, quiz2.title],
   });
 }

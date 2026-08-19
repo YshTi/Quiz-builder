@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { FiAlertTriangle, FiX } from 'react-icons/fi';
-import styles from '../styles/ConfirmModal.module.css';
+import { useEffect } from "react";
+import { FiAlertTriangle, FiX } from "react-icons/fi";
+import styles from "../styles/ConfirmModal.module.css";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -17,15 +17,15 @@ export default function ConfirmModal({
   isOpen,
   title,
   message,
-  confirmLabel = 'Delete',
-  cancelLabel = 'Cancel',
+  confirmLabel = "Delete",
+  cancelLabel = "Cancel",
   isLoading = false,
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
   useEffect(() => {
     if (!isOpen) {
-        return;
+      return;
     }
 
     const html = document.documentElement;
@@ -34,12 +34,12 @@ export default function ConfirmModal({
     const previousHtmlOverflow = html.style.overflow;
     const previousBodyOverflow = body.style.overflow;
 
-    html.style.overflow = 'hidden';
-    body.style.overflow = 'hidden';
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
 
     return () => {
-        html.style.overflow = previousHtmlOverflow;
-        body.style.overflow = previousBodyOverflow;
+      html.style.overflow = previousHtmlOverflow;
+      body.style.overflow = previousBodyOverflow;
     };
   }, [isOpen]);
 
@@ -102,7 +102,7 @@ export default function ConfirmModal({
             onClick={onConfirm}
             disabled={isLoading}
           >
-            {isLoading ? 'Deleting...' : confirmLabel}
+            {isLoading ? "Deleting..." : confirmLabel}
           </button>
         </div>
       </div>

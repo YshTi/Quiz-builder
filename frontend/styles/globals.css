@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap");
 
-@import './variables.css';
-@import './reset.css';
-@import './utilities.css';
-@import './buttons.css';
+@import "./variables.css";
+@import "./reset.css";
+@import "./utilities.css";
+@import "./buttons.css";
 
 body {
   min-height: 100vh;
@@ -12,10 +12,10 @@ body {
   color: var(--text-primary);
 
   font-family:
-    'Plus Jakarta Sans',
+    "Plus Jakarta Sans",
     -apple-system,
     BlinkMacSystemFont,
-    'Segoe UI',
+    "Segoe UI",
     Roboto,
     sans-serif;
 
@@ -24,7 +24,7 @@ body {
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: -10%;
   left: -10%;
@@ -32,16 +32,18 @@ body::before {
   width: 50vw;
   height: 50vh;
 
-  background: radial-gradient(circle,
-      rgba(124, 58, 237, 0.08) 0%,
-      transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.08) 0%,
+    transparent 70%
+  );
 
   z-index: -1;
   pointer-events: none;
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   right: -10%;
   bottom: -10%;
@@ -49,9 +51,11 @@ body::after {
   width: 50vw;
   height: 50vh;
 
-  background: radial-gradient(circle,
-      rgba(6, 182, 212, 0.08) 0%,
-      transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(6, 182, 212, 0.08) 0%,
+    transparent 70%
+  );
 
   z-index: -1;
   pointer-events: none;
