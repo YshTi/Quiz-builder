@@ -42,6 +42,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
+
+  width: 100%;
+  margin-top: 32px;
 }
 
 .errorCard, .emptyCard {
@@ -80,9 +83,97 @@
 }
 
 
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin-top: 36px;
+  margin-bottom: 24px;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.paginationButton,
+.pageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 40px;
+  height: 40px;
+
+  padding: 0 10px;
+
+  background: transparent;
+  color: var(--text-secondary);
+
+  border: 1px solid var(--panel-border);
+  border-radius: var(--border-radius-sm);
+
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.paginationButton:hover:not(:disabled),
+.paginationButton:focus-visible:not(:disabled),
+.pageButton:hover,
+.pageButton:focus-visible {
+  background: var(--interactive-bg);
+  color: var(--text-primary);
+
+  border-color: var(--interactive-border-strong);
+
+  box-shadow: var(--interactive-shadow);
+
+  outline: none;
+}
+
+.pageButtonActive {
+  background: var(--interactive-bg-strong);
+  color: var(--text-primary);
+
+  border-color: var(--interactive-border-strong);
+
+  box-shadow: var(--interactive-shadow);
+}
+
+.paginationButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+
 @media (max-width: 640px) {
   .header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .pagination {
+    gap: 8px;
+  }
+  
+  .pageNumbers {
+    gap: 6px;
+  }
+  
+  .paginationButton,
+  .pageButton {
+    min-width: 36px;
+    height: 36px;
   }
 }

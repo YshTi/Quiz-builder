@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {
@@ -7,6 +7,8 @@ import {
   Loader2,
   RefreshCw,
   AlertCircle,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 import {
@@ -20,6 +22,9 @@ import ConfirmModal from '../../components/ConfirmModal';
 
 import styles from '../../styles/Quizzes.module.css';
 
+const DESKTOP_PAGE_SIZE = 6;
+const COMPACT_PAGE_SIZE = 4;
+
 export default function QuizzesDashboard() {
   const [quizzes, setQuizzes] = useState<QuizSummary[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +36,9 @@ export default function QuizzesDashboard() {
   const [deletingId, setDeletingId] =
     useState<string | null>(null);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(DESKTOP_PAGE_SIZE);
+
   const loadQuizzes = async () => {
     setLoading(true);
     setError(null);
@@ -38,6 +46,7 @@ export default function QuizzesDashboard() {
     try {
       const data = await fetchQuizzes();
       setQuizzes(data);
+      setCurrentPage(1);
     } catch (err: unknown) {
       setError(
         err instanceof Error
@@ -80,6 +89,40 @@ export default function QuizzesDashboard() {
     };
   }, []);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1024px)');
+
+    const updatePageSize = () => {
+      setPageSize(
+        mediaQuery.matches
+          ? COMPACT_PAGE_SIZE
+          : DESKTOP_PAGE_SIZE,
+      );
+
+      setCurrentPage(1);
+    };
+
+    updatePageSize();
+
+    mediaQuery.addEventListener('change', updatePageSize);
+
+    return () => {
+      mediaQuery.removeEventListener('change', updatePageSize);
+    };
+  }, []);
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(quizzes.length / pageSize),
+  );
+
+  const paginatedQuizzes = useMemo(() => {
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    return quizzes.slice(startIndex, endIndex);
+  }, [quizzes, currentPage, pageSize]);
+
   const handleDeleteRequest = (id: string) => {
     const quiz = quizzes.find((item) => item.id === id);
 
@@ -110,9 +153,22 @@ export default function QuizzesDashboard() {
     try {
       await deleteQuiz(id);
 
-      setQuizzes((currentQuizzes) =>
-        currentQuizzes.filter((quiz) => quiz.id !== id),
-      );
+      setQuizzes((currentQuizzes) => {
+        const updatedQuizzes = currentQuizzes.filter(
+          (quiz) => quiz.id !== id,
+        );
+
+        const updatedTotalPages = Math.max(
+          1,
+          Math.ceil(updatedQuizzes.length / pageSize),
+        );
+
+        setCurrentPage((page) =>
+          Math.min(page, updatedTotalPages),
+        );
+
+        return updatedQuizzes;
+      });
 
       setQuizToDelete(null);
     } catch (err: unknown) {
@@ -124,6 +180,16 @@ export default function QuizzesDashboard() {
     } finally {
       setDeletingId(null);
     }
+  };
+
+  const goToPreviousPage = () => {
+    setCurrentPage((page) => Math.max(1, page - 1));
+  };
+
+  const goToNextPage = () => {
+    setCurrentPage((page) =>
+      Math.min(totalPages, page + 1),
+    );
   };
 
   return (
@@ -215,16 +281,70 @@ export default function QuizzesDashboard() {
             </Link>
           </div>
         ) : (
-          <div className={styles.grid}>
-            {quizzes.map((quiz) => (
-              <QuizCard
-                key={quiz.id}
-                quiz={quiz}
-                onDelete={handleDeleteRequest}
-                isDeleting={deletingId === quiz.id}
-              />
-            ))}
-          </div>
+          <>
+            <div className={styles.grid}>
+              {paginatedQuizzes.map((quiz) => (
+                <QuizCard
+                  key={quiz.id}
+                  quiz={quiz}
+                  onDelete={handleDeleteRequest}
+                  isDeleting={deletingId === quiz.id}
+                />
+              ))}
+            </div>
+
+            {totalPages > 1 && (
+              <nav
+                className={styles.pagination}
+                aria-label="Quiz pagination"
+              >
+                <button
+                  type="button"
+                  className={styles.paginationButton}
+                  onClick={goToPreviousPage}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <div className={styles.pageNumbers}>
+                  {Array.from(
+                    { length: totalPages },
+                    (_, index) => index + 1,
+                  ).map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      className={`${styles.pageButton} ${
+                        page === currentPage
+                          ? styles.pageButtonActive
+                          : ''
+                      }`}
+                      onClick={() => setCurrentPage(page)}
+                      aria-current={
+                        page === currentPage
+                          ? 'page'
+                          : undefined
+                      }
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  className={styles.paginationButton}
+                  onClick={goToNextPage}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </nav>
+            )}
+          </>
         )}
       </div>
 
