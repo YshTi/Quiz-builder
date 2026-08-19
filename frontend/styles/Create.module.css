@@ -203,16 +203,16 @@
   transition: var(--transition-smooth);
 }
 
-.typeBtn:hover {
-  background: rgba(255, 255, 255, 0.04);
+.typeBtn:hover, .typeBtn:focus {
+  background: rgba(124, 58, 237, 0.1);
   color: var(--text-primary);
-  border-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 15px rgba(124, 58, 237, 0.5);
 }
 
 .typeBtnSelected {
   background: rgba(124, 58, 237, 0.1);
   border-color: var(--accent-color);
-  color: #fff;
   box-shadow: 0 0 15px rgba(124, 58, 237, 0.15);
 }
 
@@ -220,7 +220,7 @@
   color: var(--text-muted);
 }
 
-.typeBtnSelected .typeIcon {
+.typeBtnSelected .typeIcon{
   color: #c084fc;
 }
 
@@ -398,7 +398,7 @@
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .formHeader {
     flex-direction: column;
     align-items: flex-start;

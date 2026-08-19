@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { useForm, useFieldArray, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { 
@@ -82,9 +82,8 @@ export default function CreateQuiz() {
     register,
     control,
     handleSubmit,
-    watch,
     setValue,
-    formState: { errors }
+    formState: { errors },
   } = useForm<QuizFormValues>({
     resolver: zodResolver(quizSchema),
     defaultValues: {
@@ -105,7 +104,10 @@ export default function CreateQuiz() {
     name: 'questions'
   });
 
-  const watchQuestions = watch('questions');
+  const watchedQuestions = useWatch({
+    control,
+    name: 'questions',
+  });
 
   const handleTypeChange = (index: number, newType: 'BOOLEAN' | 'INPUT' | 'CHECKBOX') => {
     setValue(`questions.${index}.type`, newType);
@@ -122,27 +124,27 @@ export default function CreateQuiz() {
   };
 
   const handleAddCheckboxOption = (qIndex: number) => {
-    const currentOptions = watchQuestions[qIndex].options || [];
+    const currentOptions = watchedQuestions[qIndex].options || [];
     const newOptionNumber = currentOptions.length + 1;
     const newOptionText = `Option ${newOptionNumber}`;
     setValue(`questions.${qIndex}.options`, [...currentOptions, newOptionText]);
   };
 
   const handleRemoveCheckboxOption = (qIndex: number, optIndex: number) => {
-    const currentOptions = [...(watchQuestions[qIndex].options || [])];
+    const currentOptions = [...(watchedQuestions[qIndex].options || [])];
     const removedOptionText = currentOptions[optIndex];
     currentOptions.splice(optIndex, 1);
     
     setValue(`questions.${qIndex}.options`, currentOptions);
 
     // Also remove from correct answers if it was selected
-    const currentCorrect = watchQuestions[qIndex].correctAnswers || [];
+    const currentCorrect = watchedQuestions[qIndex].correctAnswers || [];
     const updatedCorrect = currentCorrect.filter(ans => ans !== removedOptionText);
     setValue(`questions.${qIndex}.correctAnswers`, updatedCorrect.length > 0 ? updatedCorrect : [currentOptions[0] || '']);
   };
 
   const handleToggleCheckboxCorrectAnswer = (qIndex: number, optionText: string) => {
-    const currentCorrect = [...(watchQuestions[qIndex].correctAnswers || [])];
+    const currentCorrect = [...(watchedQuestions[qIndex].correctAnswers || [])];
     const isAlreadyCorrect = currentCorrect.includes(optionText);
     
     let newCorrect;
@@ -246,7 +248,7 @@ export default function CreateQuiz() {
 
           <div className={styles.questionsContainer}>
             {fields.map((field, qIndex) => {
-              const qType = watchQuestions[qIndex]?.type;
+              const qType = watchedQuestions[qIndex]?.type;
               const qErrors = errors.questions?.[qIndex];
 
               return (
@@ -315,7 +317,7 @@ export default function CreateQuiz() {
                       </div>
                       <div className={styles.booleanOptions}>
                         {['True', 'False'].map((option) => {
-                          const isCorrect = watchQuestions[qIndex]?.correctAnswers?.includes(option);
+                          const isCorrect = watchedQuestions[qIndex]?.correctAnswers?.includes(option);
                           return (
                             <button
                               key={option}
@@ -346,7 +348,7 @@ export default function CreateQuiz() {
                           type="text"
                           className="input-field"
                           placeholder="e.g. 4 or four (case insensitive check will apply)"
-                          value={watchQuestions[qIndex]?.correctAnswers?.[0] || ''}
+                          value={watchedQuestions[qIndex]?.correctAnswers?.[0] || ''}
                           onChange={(e) => setValue(`questions.${qIndex}.correctAnswers`, [e.target.value])}
                         />
                         {qErrors?.correctAnswers && <p className={styles.inputError}>{qErrors.correctAnswers.message}</p>}
@@ -379,8 +381,8 @@ export default function CreateQuiz() {
                       )}
 
                       <div className={styles.optionsList}>
-                        {(watchQuestions[qIndex]?.options || []).map((optionText, optIndex) => {
-                          const isCorrect = watchQuestions[qIndex]?.correctAnswers?.includes(optionText);
+                        {(watchedQuestions[qIndex]?.options || []).map((optionText, optIndex) => {
+                          const isCorrect = watchedQuestions[qIndex]?.correctAnswers?.includes(optionText);
                           return (
                             <div key={optIndex} className={styles.optionItemRow}>
                               <button
@@ -400,13 +402,13 @@ export default function CreateQuiz() {
                                 value={optionText}
                                 onChange={(e) => {
                                   const val = e.target.value;
-                                  const currentOptions = [...(watchQuestions[qIndex].options || [])];
+                                  const currentOptions = [...(watchedQuestions[qIndex].options || [])];
                                   const oldVal = currentOptions[optIndex];
                                   currentOptions[optIndex] = val;
                                   setValue(`questions.${qIndex}.options`, currentOptions);
 
                                   // If this was checked, rename it in correctAnswers too
-                                  const currentCorrect = [...(watchQuestions[qIndex].correctAnswers || [])];
+                                  const currentCorrect = [...(watchedQuestions[qIndex].correctAnswers || [])];
                                   const correctIndex = currentCorrect.indexOf(oldVal);
                                   if (correctIndex !== -1) {
                                     currentCorrect[correctIndex] = val;
@@ -421,7 +423,7 @@ export default function CreateQuiz() {
                                 className={styles.deleteOptionBtn}
                                 onClick={() => handleRemoveCheckboxOption(qIndex, optIndex)}
                                 title="Remove Option"
-                                disabled={(watchQuestions[qIndex]?.options || []).length <= 2}
+                                disabled={(watchedQuestions[qIndex]?.options || []).length <= 2}
                               >
                                 <Trash2 size={14} />
                               </button>
