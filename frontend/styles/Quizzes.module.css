@@ -223,6 +223,7 @@
 .quizListSection {
   position: relative;
   overflow: hidden;
+  min-height: 595px;
 
   padding: 24px;
 
