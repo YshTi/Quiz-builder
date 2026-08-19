@@ -1,25 +1,49 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { PlusCircle, HelpCircle, Loader2, RefreshCw, AlertCircle } from 'lucide-react';
-import { fetchQuizzes, deleteQuiz, QuizSummary } from '../../utils/api';
+import {
+  PlusCircle,
+  HelpCircle,
+  Loader2,
+  RefreshCw,
+  AlertCircle,
+} from 'lucide-react';
+
+import {
+  fetchQuizzes,
+  deleteQuiz,
+  QuizSummary,
+} from '../../utils/api';
+
 import QuizCard from '../../components/QuizCard';
+import ConfirmModal from '../../components/ConfirmModal';
+
 import styles from '../../styles/Quizzes.module.css';
 
 export default function QuizzesDashboard() {
   const [quizzes, setQuizzes] = useState<QuizSummary[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const [quizToDelete, setQuizToDelete] =
+    useState<QuizSummary | null>(null);
+
+  const [deletingId, setDeletingId] =
+    useState<string | null>(null);
 
   const loadQuizzes = async () => {
     setLoading(true);
     setError(null);
+
     try {
       const data = await fetchQuizzes();
       setQuizzes(data);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Failed to load quizzes.');
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to load quizzes.',
+      );
     } finally {
       setLoading(false);
     }
@@ -27,34 +51,76 @@ export default function QuizzesDashboard() {
 
   useEffect(() => {
     let ignore = false;
+
     const fetchInitial = async () => {
       try {
         const data = await fetchQuizzes();
+
         if (!ignore) {
           setQuizzes(data);
           setLoading(false);
         }
       } catch (err: unknown) {
         if (!ignore) {
-          setError(err instanceof Error ? err.message : 'Failed to load quizzes.');
+          setError(
+            err instanceof Error
+              ? err.message
+              : 'Failed to load quizzes.',
+          );
+
           setLoading(false);
         }
       }
     };
+
     fetchInitial();
+
     return () => {
       ignore = true;
     };
   }, []);
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteRequest = (id: string) => {
+    const quiz = quizzes.find((item) => item.id === id);
+
+    if (!quiz) {
+      return;
+    }
+
+    setQuizToDelete(quiz);
+  };
+
+  const handleCancelDelete = () => {
+    if (deletingId) {
+      return;
+    }
+
+    setQuizToDelete(null);
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!quizToDelete) {
+      return;
+    }
+
+    const id = quizToDelete.id;
+
     setDeletingId(id);
+
     try {
       await deleteQuiz(id);
-      setQuizzes((prev) => prev.filter((q) => q.id !== id));
+
+      setQuizzes((currentQuizzes) =>
+        currentQuizzes.filter((quiz) => quiz.id !== id),
+      );
+
+      setQuizToDelete(null);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Failed to delete the quiz.';
-      alert(message);
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Failed to delete the quiz.',
+      );
     } finally {
       setDeletingId(null);
     }
@@ -64,15 +130,30 @@ export default function QuizzesDashboard() {
     <>
       <Head>
         <title>Dashboard | QuizBuilder</title>
-        <meta name="description" content="View and manage all available quizzes in the QuizBuilder application." />
+
+        <meta
+          name="description"
+          content="View and manage all available quizzes in the QuizBuilder application."
+        />
       </Head>
+
       <div className="animate-slide-up">
         <div className={styles.header}>
           <div>
-            <h1 className={styles.title}>Quiz Dashboard</h1>
-            <p className={styles.subtitle}>Select a quiz to review its structure, or create a brand new one.</p>
+            <h1 className={styles.title}>
+              Quiz Dashboard
+            </h1>
+
+            <p className={styles.subtitle}>
+              Select a quiz to review its structure, or create a
+              brand new one.
+            </p>
           </div>
-          <Link href="/create" className="btn btn-primary">
+
+          <Link
+            href="/create"
+            className="btn btn-primary"
+          >
             <PlusCircle size={18} />
             <span>Create Quiz</span>
           </Link>
@@ -80,25 +161,55 @@ export default function QuizzesDashboard() {
 
         {loading ? (
           <div className={styles.loaderWrapper}>
-            <Loader2 size={36} className={styles.spinner} />
+            <Loader2
+              size={36}
+              className={styles.spinner}
+            />
+
             <p>Loading quizzes...</p>
           </div>
         ) : error ? (
-          <div className={`${styles.errorCard} glass-card`}>
-            <AlertCircle className={styles.errorIcon} size={40} />
+          <div
+            className={`${styles.errorCard} glass-card`}
+          >
+            <AlertCircle
+              className={styles.errorIcon}
+              size={40}
+            />
+
             <h3>Database Connection Issue</h3>
+
             <p>{error}</p>
-            <button onClick={() => loadQuizzes()} className="btn btn-secondary">
+
+            <button
+              type="button"
+              onClick={loadQuizzes}
+              className="btn btn-secondary"
+            >
               <RefreshCw size={16} />
               <span>Retry Connection</span>
             </button>
           </div>
         ) : quizzes.length === 0 ? (
-          <div className={`${styles.emptyCard} glass-card`}>
-            <HelpCircle className={styles.emptyIcon} size={48} />
+          <div
+            className={`${styles.emptyCard} glass-card`}
+          >
+            <HelpCircle
+              className={styles.emptyIcon}
+              size={48}
+            />
+
             <h3>No Quizzes Found</h3>
-            <p>It looks like there are no quizzes in the SQLite database yet.</p>
-            <Link href="/create" className="btn btn-primary">
+
+            <p>
+              It looks like there are no quizzes in the SQLite
+              database yet.
+            </p>
+
+            <Link
+              href="/create"
+              className="btn btn-primary"
+            >
               <PlusCircle size={18} />
               <span>Create Your First Quiz</span>
             </Link>
@@ -109,13 +220,28 @@ export default function QuizzesDashboard() {
               <QuizCard
                 key={quiz.id}
                 quiz={quiz}
-                onDelete={handleDelete}
+                onDelete={handleDeleteRequest}
                 isDeleting={deletingId === quiz.id}
               />
             ))}
           </div>
         )}
       </div>
+
+      <ConfirmModal
+        isOpen={quizToDelete !== null}
+        title="Delete quiz?"
+        message={
+          quizToDelete
+            ? `Are you sure you want to delete "${quizToDelete.title}"? This action cannot be undone.`
+            : ''
+        }
+        confirmLabel="Delete Quiz"
+        cancelLabel="Cancel"
+        isLoading={deletingId !== null}
+        onConfirm={handleConfirmDelete}
+        onCancel={handleCancelDelete}
+      />
     </>
   );
 }

@@ -1,0 +1,173 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    animation: overlayFadeIn 0.2s ease-out;
+}
+
+.modal {
+    position: relative;
+
+    width: 100%;
+    max-width: 440px;
+
+    padding: 32px;
+
+    background: var(--panel-bg);
+
+    border: 1px solid var(--panel-border);
+    border-radius: var(--border-radius-lg);
+
+    box-shadow:
+        var(--shadow-lg),
+        0 0 30px rgba(124, 58, 237, 0.12);
+
+    text-align: center;
+
+    animation: modalAppear 0.22s ease-out;
+}
+
+.closeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    width: 34px;
+    height: 34px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    color: var(--text-muted);
+
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-sm);
+
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+    background: var(--interactive-bg);
+    color: var(--text-primary);
+
+    border-color: var(--interactive-border-strong);
+
+    box-shadow: var(--interactive-shadow);
+
+    outline: none;
+}
+
+.iconWrapper {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error-color);
+
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 50%;
+}
+
+.title {
+    margin-bottom: 10px;
+
+    color: var(--text-primary);
+
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.message {
+    margin: 0 auto 28px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.deleteButton {
+    padding: 10px 20px;
+
+    background: var(--error-color);
+    color: #fff;
+
+    border: 1px solid var(--error-color);
+}
+
+.deleteButton:hover,
+.deleteButton:focus-visible {
+    background: #dc2626;
+
+    border-color: #dc2626;
+
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.35);
+
+    transform: translateY(-1px);
+
+    outline: none;
+}
+
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        padding: 28px 20px 20px;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .actions button {
+        width: 100%;
+    }
+}
